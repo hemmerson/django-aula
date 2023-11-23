@@ -45,25 +45,30 @@ Em Django, views são responsáveis por processar as requisições do cliente e 
 from django.shortcuts import render, redirect
 from .models import PessoaFisica
 
+def index(request):
+    return render(request, "index.html")
+
 def pf_lista(request):
     pessoas_fisicas = PessoaFisica.objects.all()
-    return render(request, "pf_lista.html", {'listapessoafisica': pessoas_fisicas})
+    return render(request, "pf_list.html", {'listapessoafisica': pessoas_fisicas})
+
+def pf_form(request):
+    return render(request, "pf_form.html", {'pessoa_fisica': ''})
 
 def pf_novo(request):
     rNome = request.POST.get("nome")
     rEmail = request.POST.get("email")
     rCpf = request.POST.get("cpf")
     rData_nascimento = request.POST.get("data_nascimento")
-    Pessoa.objects.create(nome = rNome, email = rEmail, cpf = rCpf, data_nascimento = rData_nascimento)
-    pessoas = Pessoa.objects.all()
+    PessoaFisica.objects.create(nome = rNome, email = rEmail, cpf = rCpf, data_nascimento = rData_nascimento)
     return redirect(pf_lista)
 
 def pf_editar(request, id):
-    pessoa_fisica = Pessoa.objects.get(id = id)
+    pessoa_fisica = PessoaFisica.objects.get(id = id)
     return render(request, "pf_form.html", {'pessoa_fisica':pessoa_fisica})
 
 def pf_update(request, id):
-    pessoa = Pessoa.objects.get(id = id)
+    pessoa = PessoaFisica.objects.get(id = id)
     pessoa.nome = request.POST.get("nome")
     pessoa.email = request.POST.get("email")
     pessoa.cpf = request.POST.get("cpf")
@@ -72,24 +77,26 @@ def pf_update(request, id):
     return redirect(pf_lista)
 
 def pf_delete(request, id):
-    pessoa = Pessoa.objects.get(id = id)
+    pessoa = PessoaFisica.objects.get(id = id)
     pessoa.delete()
     return redirect(pf_lista)
+
 ----
 
 === Configurando URL para Pessoa Fisica ===
 
-.urls.py de main
+.urls.py de cadastro
 [source, python]
 ----
 from django.urls import path
-from main import views
+from cadastro import views
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('pessoa_fisica/lista/', views.pf_lista, name='lista_pessoa_fisica'),
+    path('pessoa_fisica/form/', views.pf_form, name='novo_form_pessoa_fisica'),
     path('pessoa_fisica/novo/', views.pf_novo, name='novo_pessoa_fisica'),
-    path('pessoa_fisica/editar/<int:id>/', views.pf_editar, name='novo_pessoa_fisica'),
+    path('pessoa_fisica/editar/<int:id>/', views.pf_editar, name='editar_pessoa_fisica'),
     path('pessoa_fisica/update/<int:id>/', views.pf_update, name='update_pessoa_fisica'),
     path('pessoa_fisica/delete/<int:id>/', views.pf_delete, name='delete_pessoa_fisica'),
 ]
@@ -99,7 +106,7 @@ urlpatterns = [
 
 Para criar Templates no `Python` é preciso criar uma pasta chamada `templates` dentro do diretório do aplicativo que você está utilizando
 
-.Estrutura do Aplicativo Main
+.Estrutura do Aplicativo cadastro
 image::../diretorio-main.png[]
 
 ==== Template base do Projeto ====
@@ -137,7 +144,7 @@ image::../diretorio-main.png[]
                             <a class="nav-link" href="{% url 'lista_pessoa_fisica' %}">Pessoa Física</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pessoa Jurídica</a>
+                            <a class="nav-link" href="#<!-- {% url 'lista_pessoa_juridica' %} -->">Pessoa Jurídica</a>
                         </li>
                     </ul>
                 </div>
@@ -154,7 +161,7 @@ image::../diretorio-main.png[]
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
         integrity="sha384-pzjw8L+qc9dj70F5eS7CRaXoDjxg3SIf0l/ZeAdIuUVTQnRLV5UtNSO4MYYwDy2t"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
@@ -180,7 +187,7 @@ image::../diretorio-main.png[]
           <div class="card-body">
             <h5 class="card-title">Pessoa Física</h5>
             <p class="card-text">Crie uma nova pessoa física.</p>
-            <a href="{% url 'novo_pessoa_fisica' %}" class="btn btn-primary">Criar Pessoa Física</a>
+            <a href="{% url 'novo_form_pessoa_fisica' %}" class="btn btn-primary">Criar Pessoa Física</a>
           </div>
         </div>
       </div>
@@ -190,7 +197,7 @@ image::../diretorio-main.png[]
           <div class="card-body">
             <h5 class="card-title">Pessoa Jurídica</h5>
             <p class="card-text">Crie uma nova pessoa jurídica.</p>
-            <a href="{% url 'novo_pessoa_juridica' %}" class="btn btn-primary">Criar Pessoa Jurídica</a>
+            <a href="# <!-- {% url 'novo_pessoa_juridica' %} -->" class="btn btn-primary">Criar Pessoa Jurídica</a>
           </div>
         </div>
       </div>
@@ -214,7 +221,7 @@ Agora o Template para a listagem de `PessoaFisica`:
   <div class="container mt-4">
     <h2>Lista de Pessoas Físicas</h2>
     <div class="mt-4 mb-2">
-      <a class="btn btn-primary" href="{% url 'novo_pessoa_fisica' %}">Novo</a>
+      <a class="btn btn-primary" href="{% url 'novo_form_pessoa_fisica' %}">Novo</a>
     </div>
 
     <table class="table table-bordered">
@@ -268,14 +275,22 @@ Este template será utilizado para Cadastrar e Editar uma pessoa Física
 
     <form method="post" action="{% if pessoa_fisica %}{% url 'update_pessoa_fisica' id=pessoa_fisica.id %}{% else %}{% url 'novo_pessoa_fisica' %}{% endif %}">
         {% csrf_token %}
-        <label class="form-control" for="nome">Nome:</label>
+        <p>
+        <label for="nome">Nome:</label>
         <input class="form-control" type="text" name="nome" id="nome" value="{{ pessoa_fisica.nome }}">
-        <label class="form-control" for="email">Email:</label>
+        </p>
+        <p>
+        <label for="email">Email:</label>
         <input class="form-control" type="email" name="email" id="email" value="{{ pessoa_fisica.email }}">
-        <label class="form-control" for="cpf">CPF:</label>
-        <input class="form-control" type="number" name="cpf" id="cpf" value="{{ pessoa_fisica.cpf }}">
-        <label class="form-control" for="data_nascimento">Data de Nascimento:</label>
-        <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" value="{{ pessoa_fisica.data_nascimento }}">
+        </p>
+        <p>
+        <label for="cpf">CPF:</label>
+        <input class="form-control" type="text" name="cpf" id="cpf" value="{{ pessoa_fisica.cpf }}">
+        </p>
+        <p>
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" value="{{ pessoa_fisica.data_nascimento|date:'Y-m-d' }}">
+        </p>
         <button class="btn btn-primary" type="submit">{% if pessoa_fisica %}Atualizar{% else %}Salvar{% endif %}</button>
     </form>
 

@@ -74,11 +74,11 @@ Isso iniciará o servidor de desenvolvimento do Django. Abra seu navegador e vis
 
 === Criando o app de Desenvolvimento ===
 
-Utilizaremos o comando `startapp` do Django para criar o aplicativo. Abra seu terminal e execute o seguinte comando, substituindo meuapp pelo nome que você deseja dar ao seu aplicativo:
+Utilizaremos o comando `startapp` do Django para criar o aplicativo. Abra seu terminal e execute o seguinte comando, substituindo `cadastro` pelo nome que você deseja dar ao seu aplicativo:
 
 [source, cmd]
 ----
-python manage.py startapp meuapp
+python manage.py startapp cadastro
 ----
 
 Este comando criará a estrutura inicial do seu aplicativo.
@@ -94,7 +94,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'meuapp',
+    'cadastro',
 ]
 ----
 
@@ -109,7 +109,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('meuapp/', include('meuapp.urls')),
+    path('cadastro/', include('cadastro.urls')),
 ]
 ----
 

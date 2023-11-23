@@ -53,7 +53,7 @@ class PessoaJuridica(Pessoa):
     razao_social = models.CharField(max_length=200)
 ----
 
-Onde temos uma classe `Pessoa` que é abstrata, não terá implementação própria.Temos ainda duas classes que herdam da classe `Pessoa`, que são
+Onde temos uma classe `Pessoa` que é abstrata, não poderá ser instanciada diretamente.Temos ainda duas classes que herdam da classe `Pessoa`, que são
 `PessoaFisica` e `PessoaJuridica`.
 
 link:https://hemmerson.github.io/django-aula/[HOME]
