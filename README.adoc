@@ -36,6 +36,7 @@ Hemmerson Luis Barros da Rosa
 1. link:criando-modelo/[Criando um modelo (Model)]
 1. link:config-admin/[Integrando ao Django Admin]
 1. link:criando-views/[Criando Views, URLs e Templates de Pessoa Física]
+1. link:criando-crud-pj/[Criando Views, Forms, URLs e Templates de Pessoa Jurídica]
 
 // .Teste [fonte: referência]
 // image::cliente-faz.png[] 
