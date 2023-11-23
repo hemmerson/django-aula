@@ -100,7 +100,7 @@ urlpatterns = [
 Para criar Templates no `Python` é preciso criar uma pasta chamada `templates` dentro do diretório do aplicativo que você está utilizando
 
 .Estrutura do Aplicativo Main
-image::/diretorio-main.png[]
+image::../diretorio-main.png[]
 
 ==== Template base do Projeto ====
 
