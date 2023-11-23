@@ -37,7 +37,7 @@ Em Django, views são responsáveis por processar as requisições do cliente e 
 
 - Requisições e Respostas: As views recebem objetos de requisição e devem retornar objetos de resposta. O objeto de resposta pode ser uma página HTML renderizada, um redirecionamento, um JSON, etc.
 
-=== Criando Views para Listar, Exibir, Criar, Atualizar e Excluir Registros: ===
+=== Criando Views para Listar, Criar, Atualizar e Excluir Registros: ===
 
 .view para PessoaFisica método 1
 [source, python]
@@ -100,7 +100,7 @@ urlpatterns = [
 Para criar Templates no `Python` é preciso criar uma pasta chamada `templates` dentro do diretório do aplicativo que você está utilizando
 
 .Estrutura do Aplicativo Main
-image::../images/diretorio-main.png[]
+image::/diretorio-main.png[]
 
 ==== Template base do Projeto ====
 
