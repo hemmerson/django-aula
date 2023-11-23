@@ -103,4 +103,14 @@ django-admin --version
 
 Isso deve exibir a versão do Django que você acabou de instalar. Se você receber uma mensagem de erro ou se a versão não for exibida, verifique as etapas anteriores para garantir que a instalação foi realizada corretamente.
 
+ou ainda:
+
+[source, cmd]
+----
+pip freeze
+----
+
+Que irá mostrar as dependências instaladas no ambiente virtual `venv`.
+
+
 Com o Django instalado com sucesso, você está pronto para começar a desenvolver aplicações web poderosas e eficientes!

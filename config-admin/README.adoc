@@ -1,0 +1,47 @@
+//caminho padrão para imagens
+:imagesdir: images
+:figure-caption: Figura
+:doctype: book
+
+//gera apresentacao
+//pode se baixar os arquivos e add no diretório
+:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+
+//GERAR ARQUIVOS
+//make slides
+//make ebook
+
+//Estilo do Sumário
+:toc2: 
+//após os : insere o texto que deseja ser visível
+:toc-title: Sumário
+:figure-caption: Figura
+//numerar titulos
+:numbered:
+:source-highlighter: highlightjs
+:icons: font
+:chapter-label:
+:doctype: book
+:lang: pt-BR
+//3+| mesclar linha tabela
+
+= Integrando ao Django Admin  =
+
+O Django Admin é uma interface administrativa poderosa e flexível fornecida pelo Django para facilitar a gestão e administração de dados no seu aplicativo web. Ele oferece uma maneira fácil de interagir com os modelos de dados do seu aplicativo, permitindo realizar operações CRUD (Criar, Ler, Atualizar, Excluir) de forma intuitiva e eficiente.
+
+Aqui estão alguns pontos-chave para uma explicação mais detalhada sobre o Django Admin:
+
+- Interface Automática: O Django Admin cria automaticamente uma interface administrativa para os modelos de dados do seu aplicativo. Isso significa que, assim que você define seus modelos, o Django Admin gera páginas de administração para que você possa gerenciar os dados associados a esses modelos sem a necessidade de criar interfaces manualmente.
+
+- Configuração Simples: A configuração do Django Admin é bastante simples. Ao registrar um modelo no arquivo `admin.py` do seu aplicativo, você torna esse modelo acessível através da interface administrativa. Por exemplo:
+
+[source, python]
+----
+# SeuApp/admin.py
+
+from django.contrib import admin
+from .models import SeuModelo
+
+admin.site.register(SeuModelo)
+----
+

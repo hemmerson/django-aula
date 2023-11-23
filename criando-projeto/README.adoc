@@ -43,14 +43,15 @@ Substitua `nomedoseuprojeto` pelo nome que deseja dar ao seu projeto. Isso criar
 
 Após criar o projeto, você encontrará uma estrutura de diretórios básica. Aqui estão alguns dos diretórios e arquivos mais importantes:
 
-- nomedoseuprojeto/
+1. nomedoseuprojeto/
 
     - manage.py: Um script de utilitário que simplifica várias tarefas, como a execução de migrações, a criação de um superusuário e a execução do servidor de desenvolvimento.
+    
     - nomedoseuprojeto/: O diretório principal do projeto que compartilha o mesmo nome do projeto.
-        - __init__.py: Um arquivo vazio que indica que este diretório deve ser tratado como um pacote Python.
-        - settings.py: Arquivo de configuração principal do Django, onde são definidas configurações como o banco de dados, o idioma, o fuso horário, etc.
-        - urls.py: Arquivo que mapeia as URLs do seu projeto para as views correspondentes.
-        - asgi.py e wsgi.py: Configurações para servidores web (ASGI para servidores assíncronos, WSGI para servidores tradicionais).
+        * __init__.py: Um arquivo vazio que indica que este diretório deve ser tratado como um pacote Python.
+        * settings.py: Arquivo de configuração principal do Django, onde são definidas configurações como o banco de dados, o idioma, o fuso horário, etc.
+        * urls.py: Arquivo que mapeia as URLs do seu projeto para as views correspondentes.
+        * asgi.py e wsgi.py: Configurações para servidores web (ASGI para servidores assíncronos, WSGI para servidores tradicionais).
 
 === Entendendo o Papel de cada Componente ===
 

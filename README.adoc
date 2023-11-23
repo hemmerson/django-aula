@@ -25,14 +25,15 @@
 :lang: pt-BR
 //3+| mesclar linha tabela
 
-Hemmerson Luis Barros da Rosa
 
-= Minicurso DJANGO = 
+= Minicurso DJANGO
+Hemmerson Luis Barros da Rosa
 
 1. link:introducao/[Introdução]
 1. link:ambiente-desenvolvimento/[Ambiente de Desenvolvimento]
 1. link:criando-projeto/[Criando o Projeto]
 1. link:configurando-bd/[Configurando o Banco de Dados]
+1. link:criando-modelo/[Criando um modelo (Model)]
 
 // .Teste [fonte: referência]
 // image::cliente-faz.png[] 
