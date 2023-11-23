@@ -97,3 +97,18 @@ INSTALLED_APPS = [
     'meuapp',
 ]
 ----
+
+==== Incluindo a URL do aplicativo em urls.py ====
+
+Precisamos também incluir a url que indica o caminho de urls do aplicativo:
+
+[source, python]
+----
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('meuapp/', include('meuapp.urls')),
+]
+----

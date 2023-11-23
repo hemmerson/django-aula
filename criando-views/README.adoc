@@ -1,0 +1,287 @@
+//caminho padrão para imagens
+:imagesdir: images
+:figure-caption: Figura
+:doctype: book
+
+//gera apresentacao
+//pode se baixar os arquivos e add no diretório
+:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+
+//GERAR ARQUIVOS
+//make slides
+//make ebook
+
+//Estilo do Sumário
+:toc2: 
+//após os : insere o texto que deseja ser visível
+:toc-title: Sumário
+:figure-caption: Figura
+//numerar titulos
+:numbered:
+:source-highlighter: highlightjs
+:icons: font
+:chapter-label:
+:doctype: book
+:lang: pt-BR
+//3+| mesclar linha tabela
+
+= Criando Views, URLs e Templates de Pessoa Física =
+
+== Criando Views == 
+
+=== Entendendo a Estrutura de Views em Django: ===
+
+Em Django, views são responsáveis por processar as requisições do cliente e retornar uma resposta. Elas representam a lógica de negócios do seu aplicativo. Aqui estão algumas considerações importantes:
+
+- Funções de Views: Views podem ser funções simples ou classes baseadas em métodos (CBV). As CBVs fornecem uma abordagem orientada a objetos para organizar a lógica da view.
+
+- Requisições e Respostas: As views recebem objetos de requisição e devem retornar objetos de resposta. O objeto de resposta pode ser uma página HTML renderizada, um redirecionamento, um JSON, etc.
+
+=== Criando Views para Listar, Exibir, Criar, Atualizar e Excluir Registros: ===
+
+.view para PessoaFisica método 1
+[source, python]
+----
+from django.shortcuts import render, redirect
+from .models import PessoaFisica
+
+def pf_lista(request):
+    pessoas_fisicas = PessoaFisica.objects.all()
+    return render(request, "pf_lista.html", {'listapessoafisica': pessoas_fisicas})
+
+def pf_novo(request):
+    rNome = request.POST.get("nome")
+    rEmail = request.POST.get("email")
+    rCpf = request.POST.get("cpf")
+    rData_nascimento = request.POST.get("data_nascimento")
+    Pessoa.objects.create(nome = rNome, email = rEmail, cpf = rCpf, data_nascimento = rData_nascimento)
+    pessoas = Pessoa.objects.all()
+    return redirect(pf_lista)
+
+def pf_editar(request, id):
+    pessoa_fisica = Pessoa.objects.get(id = id)
+    return render(request, "pf_form.html", {'pessoa_fisica':pessoa_fisica})
+
+def pf_update(request, id):
+    pessoa = Pessoa.objects.get(id = id)
+    pessoa.nome = request.POST.get("nome")
+    pessoa.email = request.POST.get("email")
+    pessoa.cpf = request.POST.get("cpf")
+    pessoa.data_nascimento = request.POST.get("data_nascimento")
+    pessoa.save()
+    return redirect(pf_lista)
+
+def pf_delete(request, id):
+    pessoa = Pessoa.objects.get(id = id)
+    pessoa.delete()
+    return redirect(pf_lista)
+----
+
+=== Configurando URL para Pessoa Fisica ===
+
+.urls.py de main
+[source, python]
+----
+from django.urls import path
+from main import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('pessoa_fisica/lista/', views.pf_lista, name='lista_pessoa_fisica'),
+    path('pessoa_fisica/novo/', views.pf_novo, name='novo_pessoa_fisica'),
+    path('pessoa_fisica/editar/<int:id>/', views.pf_editar, name='novo_pessoa_fisica'),
+    path('pessoa_fisica/update/<int:id>/', views.pf_update, name='update_pessoa_fisica'),
+    path('pessoa_fisica/delete/<int:id>/', views.pf_delete, name='delete_pessoa_fisica'),
+]
+----
+
+=== Criando Templates de Pessoa Física ===
+
+Para criar Templates no `Python` é preciso criar uma pasta chamada `templates` dentro do diretório do aplicativo que você está utilizando
+
+.Estrutura do Aplicativo Main
+image::../images/diretorio-main.png[]
+
+==== Template base do Projeto ====
+
+.template base.html
+[source, html]
+----
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-1">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Seu Site</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'lista_pessoa_fisica' %}">Pessoa Física</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pessoa Jurídica</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap JS e Popper.js (necessários para alguns componentes do Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-pzjw8L+qc9dj70F5eS7CRaXoDjxg3SIf0l/ZeAdIuUVTQnRLV5UtNSO4MYYwDy2t"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>
+----
+
+=== Template Principal ===
+
+.index.html
+[source, html]
+----
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Escolha o Tipo de Pessoa</h2>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Pessoa Física</h5>
+            <p class="card-text">Crie uma nova pessoa física.</p>
+            <a href="{% url 'novo_pessoa_fisica' %}" class="btn btn-primary">Criar Pessoa Física</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Pessoa Jurídica</h5>
+            <p class="card-text">Crie uma nova pessoa jurídica.</p>
+            <a href="{% url 'novo_pessoa_juridica' %}" class="btn btn-primary">Criar Pessoa Jurídica</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+----
+
+==== Template para Listar Pessoa Fisica ====
+
+Agora o Template para a listagem de `PessoaFisica`:
+
+.template pf_list.html
+[source, html]
+----
+{% extends 'base.html' %}
+
+{% block title %}Lista de Pessoa Fisica{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Lista de Pessoas Físicas</h2>
+    <div class="mt-4 mb-2">
+      <a class="btn btn-primary" href="{% url 'novo_pessoa_fisica' %}">Novo</a>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>CPF</th>
+          <th>Data de Nascimento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pessoa_fisica in listapessoafisica %}
+          <tr>
+            <td>{{ pessoa_fisica.nome }}</td>
+            <td>{{ pessoa_fisica.email }}</td>
+            <td>{{ pessoa_fisica.cpf }}</td>
+            <td>{{ pessoa_fisica.data_nascimento }}</td>
+            <td>
+              <a href="{% url 'editar_pessoa_fisica' id=pessoa_fisica.id %}" class="btn btn-primary btn-sm">Editar</a>
+              <a href="{% url 'delete_pessoa_fisica' id=pessoa_fisica.id %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+{% endblock %}
+----
+
+==== Template de Formulário de Pessoa Fisica ====
+
+Este template será utilizado para Cadastrar e Editar uma pessoa Física
+
+.pf_form.html
+[source, html]
+----
+{% extends 'base.html' %}
+
+{% block title %}Cadastro de Pessoa Física{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    {% if pessoa_fisica %}
+      <h2>Editar Pessoa Física</h2>
+    {% else %}
+      <h2>Adicionar Nova Pessoa Física</h2>
+    {% endif %}
+
+    <form method="post" action="{% if pessoa_fisica %}{% url 'update_pessoa_fisica' id=pessoa_fisica.id %}{% else %}{% url 'novo_pessoa_fisica' %}{% endif %}">
+        {% csrf_token %}
+        <label class="form-control" for="nome">Nome:</label>
+        <input class="form-control" type="text" name="nome" id="nome" value="{{ pessoa_fisica.nome }}">
+        <label class="form-control" for="email">Email:</label>
+        <input class="form-control" type="email" name="email" id="email" value="{{ pessoa_fisica.email }}">
+        <label class="form-control" for="cpf">CPF:</label>
+        <input class="form-control" type="number" name="cpf" id="cpf" value="{{ pessoa_fisica.cpf }}">
+        <label class="form-control" for="data_nascimento">Data de Nascimento:</label>
+        <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" value="{{ pessoa_fisica.data_nascimento }}">
+        <button class="btn btn-primary" type="submit">{% if pessoa %}Atualizar{% else %}Salvar{% endif %}</button>
+    </form>
+
+    <a href="{% url 'lista_pessoa_fisica' %}" class="btn btn-secondary mt-3">Voltar para Lista</a>
+  </div>
+{% endblock %}
+----
+
+Com isso está finalizado todo o CRUD da classe `PessoaFisica`.
