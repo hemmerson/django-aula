@@ -96,3 +96,6 @@ python manage.py migrate
 ----
 
 Este comando criará as tabelas padrão do Django no banco de dados configurado.
+
+
+link:https://hemmerson.github.io/django-aula/[HOME]

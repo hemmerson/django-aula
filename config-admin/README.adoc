@@ -89,3 +89,5 @@ class PessoaFisicaAdmin(admin.ModelAdmin):
 class PessoaJuridicaAdmin(admin.ModelAdmin):
     list_display = 'nome', 'email', 'cnpj','razao_social',
 ----
+
+link:https://hemmerson.github.io/django-aula/[HOME]

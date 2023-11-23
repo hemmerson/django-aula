@@ -112,3 +112,5 @@ urlpatterns = [
     path('meuapp/', include('meuapp.urls')),
 ]
 ----
+
+link:https://hemmerson.github.io/django-aula/[HOME]

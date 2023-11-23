@@ -114,3 +114,6 @@ Que irá mostrar as dependências instaladas no ambiente virtual `venv`.
 
 
 Com o Django instalado com sucesso, você está pronto para começar a desenvolver aplicações web poderosas e eficientes!
+
+
+link:https://hemmerson.github.io/django-aula/[HOME]
