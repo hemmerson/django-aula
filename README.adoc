@@ -25,11 +25,14 @@
 :lang: pt-BR
 //3+| mesclar linha tabela
 
-Fagno Alves Fonseca <fagno.fonseca@ifto.edu.br>
-Mestre em Modelagem Computacional de Sistemas / UFT.
+Hemmerson Luis Barros da Rosa
+
+= Minicurso DJANGO = 
 
 1. link:introducao/[Introdução]
 1. link:ambiente-desenvolvimento/[Ambiente de Desenvolvimento]
+1. link:criando-projeto/[Criando o Projeto]
+1. link:configurando-bd/[Configurando o Banco de Dados]
 
 // .Teste [fonte: referência]
 // image::cliente-faz.png[] 

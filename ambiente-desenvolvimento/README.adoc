@@ -55,6 +55,7 @@ python -m venv myenv
 ----
 
 Em seguida, ative o ambiente virtual:
+
 - No Windows:
 
 [source, cmd]

@@ -1,0 +1,98 @@
+//caminho padrão para imagens
+:imagesdir: images
+:figure-caption: Figura
+:doctype: book
+
+//gera apresentacao
+//pode se baixar os arquivos e add no diretório
+:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+
+//GERAR ARQUIVOS
+//make slides
+//make ebook
+
+//Estilo do Sumário
+:toc2: 
+//após os : insere o texto que deseja ser visível
+:toc-title: Sumário
+:figure-caption: Figura
+//numerar titulos
+:numbered:
+:source-highlighter: highlightjs
+:icons: font
+:chapter-label:
+:doctype: book
+:lang: pt-BR
+//3+| mesclar linha tabela
+
+= Criando Projeto DJANGO =
+
+Para começar a desenvolver com Django, o primeiro passo é criar um novo projeto. O Django oferece uma ferramenta de linha de comando chamada `django-admin`, que simplifica esse processo.
+
+== Criando um Novo Projeto ==
+Abra o terminal ou prompt de comando e execute o seguinte comando:
+
+[source, cmd]
+----
+django-admin startproject nomedoseuprojeto .
+----
+
+Substitua `nomedoseuprojeto` pelo nome que deseja dar ao seu projeto. Isso criará um diretório com a estrutura básica do projeto Django.
+
+=== Explorando a Estrutura Básica do Projeto ===
+
+Após criar o projeto, você encontrará uma estrutura de diretórios básica. Aqui estão alguns dos diretórios e arquivos mais importantes:
+
+- nomedoseuprojeto/
+
+    - manage.py: Um script de utilitário que simplifica várias tarefas, como a execução de migrações, a criação de um superusuário e a execução do servidor de desenvolvimento.
+    - nomedoseuprojeto/: O diretório principal do projeto que compartilha o mesmo nome do projeto.
+        - __init__.py: Um arquivo vazio que indica que este diretório deve ser tratado como um pacote Python.
+        - settings.py: Arquivo de configuração principal do Django, onde são definidas configurações como o banco de dados, o idioma, o fuso horário, etc.
+        - urls.py: Arquivo que mapeia as URLs do seu projeto para as views correspondentes.
+        - asgi.py e wsgi.py: Configurações para servidores web (ASGI para servidores assíncronos, WSGI para servidores tradicionais).
+
+=== Entendendo o Papel de cada Componente ===
+
+- settings.py: Configure as características fundamentais do seu projeto Django, como o banco de dados, aplicativos instalados, configurações de middleware e muito mais.
+
+- urls.py: Mapeie URLs para funções específicas em suas views, definindo como as solicitações HTTP serão manipuladas.
+
+- manage.py: Use este script para realizar várias tarefas administrativas, como a execução de migrações, criação de superusuários, execução de servidores de desenvolvimento, entre outras.
+
+=== Executando o Servidor de Desenvolvimento ===
+
+Dentro do diretório do seu projeto, execute o seguinte comando:
+
+[source, cmd]
+----
+python manage.py runserver
+----
+
+Isso iniciará o servidor de desenvolvimento do Django. Abra seu navegador e visite http://localhost:8000/ ou http://127.0.0.1:8000/ para ver a página inicial padrão do Django.
+
+=== Criando o app de Desenvolvimento ===
+
+Utilizaremos o comando `startapp` do Django para criar o aplicativo. Abra seu terminal e execute o seguinte comando, substituindo meuapp pelo nome que você deseja dar ao seu aplicativo:
+
+[source, cmd]
+----
+python manage.py startapp meuapp
+----
+
+Este comando criará a estrutura inicial do seu aplicativo.
+
+O próximo passo é encontrar no diretório raiz do projeto o arquivo `settings.py`, neste arquivo na seção de `INSTALLED_APPS`, incluir o aplicativo criado anteriormente.
+
+[source, python]
+----
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'meuapp',
+]
+----
