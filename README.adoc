@@ -34,6 +34,7 @@ Hemmerson Luis Barros da Rosa
 1. link:criando-projeto/[Criando o Projeto]
 1. link:configurando-bd/[Configurando o Banco de Dados]
 1. link:criando-modelo/[Criando um modelo (Model)]
+1. link:config-admin/[Integrando ao Django Admin]
 
 // .Teste [fonte: referência]
 // image::cliente-faz.png[] 

@@ -45,3 +45,47 @@ from .models import SeuModelo
 admin.site.register(SeuModelo)
 ----
 
+Com essas poucas linhas de código, você pode começar a gerenciar os registros do modelo SeuModelo no Django Admin.
+
+=== Recursos Poderosos: ===
+
+O Django Admin não é apenas simples; ele também é poderoso. Ele fornece recursos avançados, como:
+
+- Pesquisa e filtragem: Encontre facilmente registros específicos.
+- Ordenação: Classifique os registros com um clique.
+- Páginas de detalhes: Visualize detalhes completos de um registro.
+- Ações em lote: Execute ações em vários registros simultaneamente.
+- Extensibilidade: Personalize a aparência e o comportamento da interface.
+
+=== Segurança Integrada: ===
+
+O Django Admin inclui recursos de segurança integrados para proteger a administração do seu aplicativo. É possível controlar quem tem acesso ao Django Admin e o que eles podem fazer.
+
+=== Personalização Avançada: ===
+
+Além de simples registros de modelos, você pode personalizar a aparência e o comportamento do Django Admin. Isso inclui a criação de classes ModelAdmin personalizadas para controlar a apresentação e o comportamento específicos do modelo.
+
+=== Suporte a Múltiplos Aplicativos: ===
+
+O Django Admin suporta aplicativos múltiplos. Se você estiver construindo um projeto Django com vários aplicativos, todos os modelos desses aplicativos podem ser gerenciados centralmente através do Django Admin.
+
+=== Integração com Aplicações de Terceiros: ===
+
+Muitas aplicações de terceiros do Django são projetadas para integrar-se perfeitamente ao Django Admin. Isso significa que, ao adicionar uma nova funcionalidade ao seu projeto, você também pode obter automaticamente uma interface administrativa correspondente.
+
+=== Utilizado no Projeto ===
+
+[source, python]
+----
+from django.contrib import admin
+from .models import PessoaFisica, PessoaJuridica
+
+# Register your models here.
+@admin.register(PessoaFisica)
+class PessoaFisicaAdmin(admin.ModelAdmin):
+    list_display = 'nome', 'email', 'cpf','data_nascimento',
+
+@admin.register(PessoaJuridica)
+class PessoaJuridicaAdmin(admin.ModelAdmin):
+    list_display = 'nome', 'email', 'cnpj','razao_social',
+----

@@ -31,5 +31,27 @@
 
 Em Django, modelos (models) representam a camada de abstração entre a lógica da aplicação e o banco de dados. Eles definem a estrutura dos dados e são essenciais para a manipulação eficiente das informações.
 
-=== Definição de um Modelo Simples para a Aplicação ===
+=== Definição de um Modelo para a Aplicação ===
 
+[source, python]
+----
+from django.db import models
+
+class Pessoa(models.Model):
+    nome = models.CharField(max_length=100, null=False)
+    email = models.EmailField(max_length=100, null=False)
+
+    class Meta:
+        abstract = True
+
+class PessoaFisica(Pessoa):
+    cpf = models.CharField(max_length=14, unique=True)
+    data_nascimento = models.DateField()
+
+class PessoaJuridica(Pessoa):
+    cnpj = models.CharField(max_length=18, unique=True)
+    razao_social = models.CharField(max_length=200)
+----
+
+Onde temos uma classe `Pessoa` que é abstrata, não terá implementação própria.Temos ainda duas classes que herdam da classe `Pessoa`, que são
+`PessoaFisica` e `PessoaJuridica`.
