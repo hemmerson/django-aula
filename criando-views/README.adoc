@@ -276,7 +276,7 @@ Este template será utilizado para Cadastrar e Editar uma pessoa Física
         <input class="form-control" type="number" name="cpf" id="cpf" value="{{ pessoa_fisica.cpf }}">
         <label class="form-control" for="data_nascimento">Data de Nascimento:</label>
         <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" value="{{ pessoa_fisica.data_nascimento }}">
-        <button class="btn btn-primary" type="submit">{% if pessoa %}Atualizar{% else %}Salvar{% endif %}</button>
+        <button class="btn btn-primary" type="submit">{% if pessoa_fisica %}Atualizar{% else %}Salvar{% endif %}</button>
     </form>
 
     <a href="{% url 'lista_pessoa_fisica' %}" class="btn btn-secondary mt-3">Voltar para Lista</a>
