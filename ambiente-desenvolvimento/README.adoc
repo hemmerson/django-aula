@@ -1,0 +1,105 @@
+//caminho padrão para imagens
+:imagesdir: images
+:figure-caption: Figura
+:doctype: book
+
+//gera apresentacao
+//pode se baixar os arquivos e add no diretório
+:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+
+//GERAR ARQUIVOS
+//make slides
+//make ebook
+
+//Estilo do Sumário
+:toc2: 
+//após os : insere o texto que deseja ser visível
+:toc-title: Sumário
+:figure-caption: Figura
+//numerar titulos
+:numbered:
+:source-highlighter: highlightjs
+:icons: font
+:chapter-label:
+:doctype: book
+:lang: pt-BR
+//3+| mesclar linha tabela
+
+== Preparação do Ambiente de Desenvolvimento ==
+
+Antes de começarmos a explorar as capacidades do Django, é crucial garantir que ele esteja instalado em seu ambiente de desenvolvimento. O método mais comum para instalar o Django é usando a ferramenta pip, o gerenciador de pacotes para Python.
+
+=== Verificação do Python e pip ===
+
+Antes de prosseguir, certifique-se de ter o `Python` e o `pip` instalados em seu sistema. Abra o terminal ou prompt de comando e execute os seguintes comandos para verificar suas versões:
+
+[source, cmd]
+----
+python --version
+----
+
+[source, cmd]
+----
+pip --version
+----
+
+Se esses comandos retornarem as versões correspondentes do `Python` e do `pip`, você está pronto para continuar. Caso contrário, instale o Python e o pip seguindo as instruções disponíveis em link:https://www.python.org/downloads/[python.org] e link:https://pip.pypa.io/en/stable/installation/[pip.pypa.io].
+
+=== Criando o ambiente virtual ===
+
+É uma prática recomendada criar um ambiente virtual para cada projeto Django, a fim de isolar as dependências do projeto. Se não estiver familiarizado com ambientes virtuais, você pode criar um usando o seguinte comando:
+
+[source, cmd]
+----
+python -m venv myenv
+----
+
+Em seguida, ative o ambiente virtual:
+- No Windows:
+
+[source, cmd]
+----
+.\myenv\Scripts\activate
+----
+
+- No macOS/Linux:
+
+[source, cmd]
+----
+source myenv/bin/activate
+----
+
+==== Finalizando o projeto ====
+
+Ao finalizar o projeto, você pode desativar o ambiente virtual usando o comando:
+
+[source, cmd]
+----
+deactivate
+----
+
+Este procedimento ajuda a manter a consistência das dependências entre diferentes projetos Python.
+
+=== Instalação do Django ===
+
+Com o Python e o pip configurados, instale o Django usando o seguinte comando:
+
+[source, cmd]
+----
+pip install django
+----
+
+Esse comando baixará e instalará a versão mais recente do Django disponível no repositório oficial do Python Package Index (PyPI).
+
+=== Verificação da Instalação ===
+
+Após a conclusão da instalação, verifique se o Django foi instalado corretamente executando o seguinte comando:
+
+[source, cmd]
+----
+django-admin --version
+----
+
+Isso deve exibir a versão do Django que você acabou de instalar. Se você receber uma mensagem de erro ou se a versão não for exibida, verifique as etapas anteriores para garantir que a instalação foi realizada corretamente.
+
+Com o Django instalado com sucesso, você está pronto para começar a desenvolver aplicações web poderosas e eficientes!

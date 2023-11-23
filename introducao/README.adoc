@@ -1,0 +1,107 @@
+//caminho padrão para imagens
+:imagesdir: images
+:figure-caption: Figura
+:doctype: book
+
+//gera apresentacao
+//pode se baixar os arquivos e add no diretório
+:revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+
+//GERAR ARQUIVOS
+//make slides
+//make ebook
+
+//Estilo do Sumário
+:toc2: 
+//após os : insere o texto que deseja ser visível
+:toc-title: Sumário
+:figure-caption: Figura
+//numerar titulos
+:numbered:
+:source-highlighter: highlightjs
+:icons: font
+:chapter-label:
+:doctype: book
+:lang: pt-BR
+//3+| mesclar linha tabela
+
+== O que é o Django? ==
+
+Django é um framework web de alto nível, gratuito e de código aberto, criado em Python. Desenvolvido para facilitar a criação de aplicações web robustas, Django segue o princípio "Don't Repeat Yourself" (DRY) e visa tornar o desenvolvimento web uma tarefa mais agradável e eficiente.
+
+== Principais Características do Django ==
+
+=== Design MTV: Model, Template, View ===
+
+O Django adota uma arquitetura chamada MTV, uma variação do padrão MVC (Model-View-Controller), organizando a aplicação de forma modular para promover clareza e manutenção do código. Cada componente desempenha um papel específico:
+
+==== Model (Modelo) ====
+
+O Model gerencia os dados e a interação com o banco de dados, sendo representado por classes Python que definem a estrutura dos dados e suas relações. O Django ORM (Object-Relational Mapping) facilita a manipulação do banco de dados usando código Python.
+
+==== Template (Modelo de Apresentação) ====
+
+Responsável pela apresentação e interface do usuário, o Template utiliza HTML com uma linguagem de modelo própria. Isso separa a lógica de apresentação do código, facilitando a leitura e edição. O mecanismo de renderização preenche dinamicamente os templates com dados antes de enviá-los ao navegador.
+
+==== View (Visão) ====
+
+Intermediária entre o modelo e o template, a View processa as solicitações do usuário, manipula a lógica de negócios e controla o fluxo de dados. As views são funções ou classes Python que recebem solicitações HTTP, interagem com o modelo e retornam respostas HTTP.
+
+Ao seguir a arquitetura MTV, o Django proporciona uma separação clara de responsabilidades, facilitando a manutenção do código, promovendo a reutilização de componentes e permitindo uma colaboração eficiente.
+
+== Administração Automática de Banco de Dados ==
+
+Django simplifica a gestão de banco de dados por meio de migrações, scripts Python que evoluem o esquema do banco conforme as mudanças nos modelos. O processo de migração envolve:
+
+    - makemigrations: Cria scripts de migração representando alterações nos modelos.
+    - migrate: Aplica as migrações, atualizando o banco de dados de acordo com as modificações nos modelos.
+
+=== Vantagens da Administração Automática ===
+
+- Rastreamento de Alterações: Migrações servem como histórico de alterações, facilitando a colaboração em equipe e reversão de mudanças.
+- Portabilidade: Migrações são portáteis entre ambientes, garantindo consistência no esquema do banco de dados.
+- Simplicidade e Segurança: Automatização reduz erros e torna o desenvolvimento mais eficiente.
+
+== Sistema de Administração Integrado ==
+
+O Sistema de Administração Integrado do Django é uma ferramenta poderosa que simplifica a gestão de modelos de dados sem exigir a criação manual de interfaces administrativas.
+
+=== Principais Aspectos do Sistema de Administração ===
+
+- Interface Administrativa Automática: Django gera automaticamente uma interface administrativa com base nos modelos definidos.
+
+- Operações CRUD Intuitivas: O sistema administra automaticamente as operações CRUD (Create, Read, Update, Delete) para os modelos.
+
+- Configuração Mínima Necessária: Administração está disponível "out of the box", proporcionando uma experiência de desenvolvimento mais rápida.
+
+- Customização Flexível: Além da poderosa interface padrão, Django oferece opções para personalizar aparência e comportamento.
+
+- Segurança Integrada: Acesso controlado por autenticação para manter a segurança dos dados.
+
+=== Benefícios do Sistema de Administração Integrado ===
+
+- Agilidade no Desenvolvimento: Reduz a necessidade de criar interfaces administrativas manualmente, economizando tempo.
+- Manutenção Simples: Atualizações no modelo de dados são refletidas automaticamente na administração.
+- Facilidade de Uso para Administradores: Equipes não técnicas podem gerenciar dados sem depender de desenvolvedores.
+
+== Facilidade na Criação de Formulários ==
+
+Django oferece uma abordagem simplificada e eficiente na criação e validação de formulários, proporcionando uma interação mais fluida e intuitiva com os usuários.
+
+=== Principais Aspectos na Criação de Formulários em Django ===
+
+- Formulários como Classes Python: Representados como classes Python, simplificando a criação e manutenção, encapsulando a estrutura e lógica de validação.
+
+- Campos e Widgets Poderosos: Variedade de campos e widgets prontos para uso, oferecendo flexibilidade na apresentação visual.
+
+- Validação Automática: Validação de dados do formulário é automática, reduzindo a probabilidade de erros.
+
+- Personalização Flexível: Formulários podem ser facilmente personalizados para requisitos específicos, como adicionar campos ou definir mensagens de erro.
+
+- Integração com Modelos: Possibilidade de vincular formulários diretamente aos modelos, facilitando a criação, atualização e validação de dados do modelo por meio do formulário.
+
+=== Benefícios da Abordagem de Formulários em Django ===
+
+- Reutilização de Lógica de Validação: Lógica de validação definida no nível do formulário pode ser reutilizada em várias partes da aplicação.
+- Redução de Código Repetitivo: Simplifica a criação de interfaces consistentes, reduzindo a necessidade de codificar validações repetitivas.
+- Facilidade de Manutenção: Mudanças nos requisitos do formulário podem ser feitas centralmente na classe do formulário, simplificando a manutenção e evolução da interface do usuário.
