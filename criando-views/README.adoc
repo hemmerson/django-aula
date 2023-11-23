@@ -33,7 +33,7 @@
 
 Em Django, views são responsáveis por processar as requisições do cliente e retornar uma resposta. Elas representam a lógica de negócios do seu aplicativo. Aqui estão algumas considerações importantes:
 
-- Funções de Views: Views podem ser funções simples ou classes baseadas em métodos (CBV). As CBVs fornecem uma abordagem orientada a objetos para organizar a lógica da view.
+- Funções de Views: Views podem ser funções simples ou classes baseadas em métodos Class-Based View(CBV). As CBVs fornecem uma abordagem orientada a objetos para organizar a lógica da view.
 
 - Requisições e Respostas: As views recebem objetos de requisição e devem retornar objetos de resposta. O objeto de resposta pode ser uma página HTML renderizada, um redirecionamento, um JSON, etc.
 
