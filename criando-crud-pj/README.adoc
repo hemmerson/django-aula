@@ -243,7 +243,7 @@ Este template será utilizado para Cadastrar e Editar uma pessoa Jurídica
       <button type="submit" class="btn btn-primary mt-3">Salvar</button>
     </form>
 
-    <a href="{% url 'lista_pessoa_fisica' %}" class="btn btn-secondary mt-3">Voltar para Lista</a>
+    <a href="{% url 'lista_pessoa_juridica' %}" class="btn btn-secondary mt-3">Voltar para Lista</a>
   </div>
 {% endblock %}
 ----
